@@ -1,20 +1,37 @@
 import { useState } from 'react';
-import Timer from './component/Timer';
+
+function heavyWork() {
+  console.log('Heavy Work');
+  return ['Kim', 'Lee'];
+}
 
 function App() {
-  const [timer, setTimer] = useState(false);
+  const [names, setNames] = useState(() => heavyWork()); // Important callback
+  const [input, setInput] = useState('');
 
-  const handleClick = () => {
-    setTimer((prevTimer) => !prevTimer);
+  const handleInputChange = (e) => {
+    setInput(e.target.value);
   };
+
+  const handleClickAdd = () => {
+    setNames((prevState) => [input, ...prevState]);
+    setInput((prevState) => '');
+  };
+
+  const showNames = names.map((name, index) => <li key={index}>{name}</li>);
 
   return (
     <div className="App">
-      <h2>
-        Timer is {timer ? 'Start' : 'Stop!'}
-        {timer && <Timer />}
-      </h2>
-      <button onClick={handleClick}>Click</button>
+      <div className="form">
+        <input
+          type="text"
+          placeholder="Enter name"
+          value={input}
+          onChange={handleInputChange}
+        />
+        <button onClick={handleClickAdd}>Add</button>
+      </div>
+      <ul>{showNames}</ul>
     </div>
   );
 }
