@@ -1,29 +1,26 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0);
-  const countRef = useRef(0);
+  const inputRef = useRef();
 
-  const increaseCountState = () => {
-    setCount((prevCount) => prevCount + 1);
+  useEffect(() => {
+    // console.log(inputRef);
+    inputRef.current.focus();
+  });
+
+  const handleClickLogin = () => {
+    alert(`Hello, ${inputRef.current.value}`);
+    inputRef.current.value = '';
+    inputRef.current.focus();
   };
 
-  console.log('Rendering...');
-
-  const increaseCountRef = () => {
-    countRef.current = countRef.current + 1;
-    console.log(`countRef: ${countRef.current}`);
-  };
+  console.log('Renderd...');
 
   return (
     <div className="App">
-      <div className="cnt state">
-        <h2>State: {count}</h2>
-        <button onClick={increaseCountState}>Up</button>
-      </div>
-      <div className="cnt">
-        <h2>Ref: {countRef.current}</h2>
-        <button onClick={increaseCountRef}>Up</button>
+      <div className="form">
+        <input ref={inputRef} type="text" placeholder="Enter name..." />
+        <button onClick={handleClickLogin}>login</button>
       </div>
     </div>
   );

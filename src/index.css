@@ -7,20 +7,16 @@ body {
   font-family: 'Nanum Gothic', sans-serif;
 }
 
-button {
-  margin-top: 10px;
-  width: 80px;
-}
-
 .App {
   display: flex;
   padding: 20px 20px;
 }
 
-.cnt {
-  text-align: center;
+.form {
+  display: flex;
 }
 
-.state {
-  margin-right: 50px;
+input {
+  font-size: 18px;
+  margin-right: 10px;
 }
