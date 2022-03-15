@@ -1,28 +1,19 @@
-import { useEffect, useRef } from 'react';
+import { useState } from 'react';
+import Page from './components/Page';
+import ThemeContext from './context/ThemeContext';
+import TopicContext from './context/TopicContext';
 
 function App() {
-  const inputRef = useRef();
-
-  useEffect(() => {
-    // console.log(inputRef);
-    inputRef.current.focus();
-  });
-
-  const handleClickLogin = () => {
-    alert(`Hello, ${inputRef.current.value}`);
-    inputRef.current.value = '';
-    inputRef.current.focus();
-  };
-
-  console.log('Renderd...');
+  const [isDark, setIsDark] = useState(false);
+  const headerTitle = 'React Hooks';
+  const contentTitle = 'createContext';
 
   return (
-    <div className="App">
-      <div className="form">
-        <input ref={inputRef} type="text" placeholder="Enter name..." />
-        <button onClick={handleClickLogin}>login</button>
-      </div>
-    </div>
+    <TopicContext.Provider value={{ headerTitle, contentTitle }}>
+      <ThemeContext.Provider value={{ isDark, setIsDark }}>
+        <Page />;
+      </ThemeContext.Provider>
+    </TopicContext.Provider>
   );
 }
 
